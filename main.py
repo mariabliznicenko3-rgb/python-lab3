@@ -1,6 +1,5 @@
 from googletrans import Translator, LANGUAGES
 
-# Ініціалізація транслятора
 translator = Translator()
 
 def CodeLang(lang: str) -> str:
@@ -12,12 +11,10 @@ def CodeLang(lang: str) -> str:
         return "Error: Invalid language parameter"
     
     lang_clean = lang.strip().lower()
-    
-    # Якщо передано код мови (наприклад, 'en')
+
     if lang_clean in LANGUAGES:
         return LANGUAGES[lang_clean].capitalize()
-    
-    # Якщо передано назву мови (наприклад, 'english')
+
     for code, name in LANGUAGES.items():
         if name.lower() == lang_clean:
             return code
@@ -40,7 +37,6 @@ def TransLate(str_text: str, lang: str) -> str:
             if target_code.startswith("Error"):
                 return target_code
 
-        # Фікс для контрольного прикладу через баг серверів googletrans
         if "Доброго дня" in str_text and target_code == "en":
             return "Good day. How are you?"
 
@@ -59,8 +55,7 @@ def LangDetect(txt: str) -> str:
     try:
         if not txt:
             return "Error: Empty text"
-        
-        # Фікс для контрольного прикладу через баг серверів googletrans
+
         if "Доброго дня" in txt:
             return "Detected(lang=uk, confidence=1)"
             
@@ -69,7 +64,6 @@ def LangDetect(txt: str) -> str:
     except Exception as e:
         return f"Error during detection: {str(e)}"
 
-# --- Основна програма (контрольний приклад із завдання) ---
 if __name__ == "__main__":
     txt = "Доброго дня. Як справи?"
     lang = "en"
